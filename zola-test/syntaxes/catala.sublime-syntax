@@ -1,0 +1,60 @@
+%YAML 1.2
+---
+name: catala
+scope: source.catala
+file_extensions: [ catala ]
+
+contexts:
+  main:
+    - match: '(\s*\#.*$)'
+      captures:
+        0: comment.line.catala_en
+    - match: '(context)(\s+)([a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00ea}\x{0153}\x{00e7}][a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00ea}\x{0153}\x{00e7}A-Z\x{00c9}\x{00c8}\x{00c0}\x{00c2}\x{00d9}\x{00ce}\x{00ca}\x{0152}\x{00c7}0-9_\'']*)'
+      captures:
+        0: keyword.other.catala_en
+        1: text.catala_en
+        2: entity.name.function.catala_en
+    - match: '\b(match|with\s+pattern|fixed|by|decreasing|increasing|varies|with|we\s+have|in|such\s+that|exists|for|all|of|if|then|else|initial)\b'
+      captures:
+        0: keyword.control.catala_en
+    - match: '\b(scope|depends\s+on|declaration|includes|collection|content|optional|structure|enumeration|context|rule|under\s+condition|condition|data|consequence|fulfilled|equals|assertion|definition|label|exception)\b'
+      captures:
+        0: keyword.other.catala_en
+    - match: '(\|[0-9]+\-[0-9]+\-[0-9]+\|)'
+      captures:
+        0: constant.numeric.catala_en
+    - match: '\b(true|false)\b'
+      captures:
+        0: constant.catala_en
+    - match: '\b([0-9]+(,[0.9]*|))\b'
+      captures:
+        0: constant.numeric.catala_en
+    - match: '(\-\-|\;|\.|\,|\:|\(|\)|\[|\]|\{|\})'
+      captures:
+        0: punctuation.catala_en
+    - match: '(\-\>|\+\.|\+\@|\+\^|\+\$|\+|\-\.|\-\@|\-\^|\-\$|\-|\*\.|\*\@|\*\^|\*\$|\*|/\.|/\@|/\^|/\$|/|\!|>\.|>=\.|<=\.|<\.|>\@|>=\@|<=\@|<\@|>\$|>=\$|<=\$|<\$|>\^|>=\^|<=\^|<\^|>|>=|<=|<|=|not|or|xor|and|\$|%|year|month|day)'
+      captures:
+        0: keyword.operator.catala_en
+    - match: '\b(integer|boolean|date|duration|money|text|decimal|number|sum)\b'
+      captures:
+        0: support.type.catala_en
+    - match: '\b([A-Z\x{00c9}\x{00c8}\x{00c0}\x{00c2}\x{00d9}\x{00ce}\x{00ca}\x{0152}\x{00c7}][a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00ea}\x{0153}\x{00e7}A-Z\x{00c9}\x{00c8}\x{00c0}\x{00c2}\x{00d9}\x{00ce}\x{00ca}\x{0152}\x{00c7}0-9_\'']*)(\.)([a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00ea}\x{0153}\x{00e7}][a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00ea}\x{0153}\x{00e7}A-Z\x{00c9}\x{00c8}\x{00c0}\x{00c2}\x{00d9}\x{00ce}\x{00ca}\x{0152}\x{00c7}0-9_\'']*)\b'
+      captures:
+        0: entity.name.class.catala_en
+        1: punctuation.catala_en
+        2: entity.name.function.catala_en
+    - match: '\b([a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00ea}\x{0153}\x{00e7}][a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00ea}\x{0153}\x{00e7}A-Z\x{00c9}\x{00c8}\x{00c0}\x{00c2}\x{00d9}\x{00ce}\x{00ca}\x{0152}\x{00c7}0-9_\'']*)(\.)([a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00ea}\x{0153}\x{00e7}][a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00ea}\x{0153}\x{00e7}A-Z\x{00c9}\x{00c8}\x{00c0}\x{00c2}\x{00d9}\x{00ce}\x{00ca}\x{0152}\x{00c7}0-9_\''\.]*)\b'
+      captures:
+        0: entity.name.function.catala_en
+        1: punctuation.catala_en
+        2: meta.variable_id.catala_en
+    - match: '\b([a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00ea}\x{0153}\x{00e7}][a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00ea}\x{0153}\x{00e7}A-Z\x{00c9}\x{00c8}\x{00c0}\x{00c2}\x{00d9}\x{00ce}\x{00ca}\x{0152}\x{00c7}0-9_\'']*)\b'
+      captures:
+        0: entity.name.function.catala_en
+    - match: '\b([A-Z\x{00c9}\x{00c8}\x{00c0}\x{00c2}\x{00d9}\x{00ce}\x{00ca}\x{0152}\x{00c7}][a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00ea}\x{0153}\x{00e7}A-Z\x{00c9}\x{00c8}\x{00c0}\x{00c2}\x{00d9}\x{00ce}\x{00ca}\x{0152}\x{00c7}0-9_\'']*)\b'
+      captures:
+        0: entity.name.class.catala_en
+    - match: '(.)'
+      captures:
+        0: text.catala_en
+

@@ -1,0 +1,64 @@
+%YAML 1.2
+---
+name: catala_fr
+scope: source.catala_fr
+file_extensions: [ catala_fr ]
+
+contexts:
+  main:
+    - match: '(```)'
+      pop: true
+      captures:
+        0: comment.block.documentation.catala_fr
+    - match: '(\s*\#.*$)'
+      captures:
+        0: comment.line.catala_fr
+    - match: '(contexte)(\s+)([a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00f4}\x{00ea}\x{0153}\x{00e7}][a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00f4}\x{00ea}\x{0153}\x{00e7}A-Z\x{00c9}\x{00c8}\x{00c0}\x{00c2}\x{00d9}\x{00ce}\x{00d4}\x{00ca}\x{0152}\x{00c7}0-9_\'']*)'
+      captures:
+        0: keyword.other.catala_fr
+        1: text.catala_fr
+        2: entity.name.function.catala_fr
+    - match: '\b(selon|sous\s+forme|fixé|par|décroissante|croissante|varie|avec|on\s+a|dans|tel\s+que|existe|pour|tout|de|si|alors|sinon|initial)\b'
+      captures:
+        0: keyword.control.catala_fr
+    - match: '\b(champ\s+d''application|si\s+et\s+seulement\s+si|dépend\s+de|déclaration|inclus|collection|contenu|optionnel|structure|énumération|contexte|règle|sous\s+condition|condition|donnée|conséquence|rempli|égal\s+à|assertion|définition|étiquette|exception)\b'
+      captures:
+        0: keyword.other.catala_fr
+    - match: '(\|[0-9]+\-[0-9]+\-[0-9]+\|)'
+      captures:
+        0: constant.numeric.catala_fr
+    - match: '\b(vrai|faux)\b'
+      captures:
+        0: constant.catala_fr
+    - match: '\b([0-9]+(,[0.9]*|))\b'
+      captures:
+        0: constant.numeric.catala_fr
+    - match: '(\-\-|\;|\.|\,|\:|\(|\)|\[|\]|\{|\})'
+      captures:
+        0: punctuation.catala_fr
+    - match: '(\-\>|\+\.|\+\@|\+\^|\+\x{20ac}|\+|\-\.|\-\@|\-\^|\-\x{20ac}|\-|\*\.|\*\@|\*\^|\*\x{20ac}|\*|/\.|/\@|/\^|/\x{20ac}|/|\!|>\.|>=\.|<=\.|<\.|>\@|>=\@|<=\@|<\@|>\x{20ac}|>=\x{20ac}|<=\x{20ac}|<\x{20ac}|>\^|>=\^|<=\^|<\^|>|>=|<=|<|=|non|ou\s+bien|ou|et|\x{20ac}|%|an|mois|jour)'
+      captures:
+        0: keyword.operator.catala_fr
+    - match: '\b(entier|booléen|date|durée|argent|texte|décimal|décret|loi|nombre|somme)\b'
+      captures:
+        0: support.type.catala_fr
+    - match: '\b([A-Z\x{00c9}\x{00c8}\x{00c0}\x{00c2}\x{00d9}\x{00ce}\x{00d4}\x{00ca}\x{0152}\x{00c7}][a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00f4}\x{00ea}\x{0153}\x{00e7}A-Z\x{00c9}\x{00c8}\x{00c0}\x{00c2}\x{00d9}\x{00ce}\x{00d4}\x{00ca}\x{0152}\x{00c7}0-9_\'']*)(\.)([a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00f4}\x{00ea}\x{0153}\x{00e7}][a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00f4}\x{00ea}\x{0153}\x{00e7}A-Z\x{00c9}\x{00c8}\x{00c0}\x{00c2}\x{00d9}\x{00ce}\x{00d4}\x{00ca}\x{0152}\x{00c7}0-9_\'']*)\b'
+      captures:
+        0: entity.name.class.catala_fr
+        1: punctuation.catala_fr
+        2: entity.name.function.catala_fr
+    - match: '\b([a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00f4}\x{00ea}\x{0153}\x{00e7}][a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00f4}\x{00ea}\x{0153}\x{00e7}A-Z\x{00c9}\x{00c8}\x{00c0}\x{00c2}\x{00d9}\x{00ce}\x{00d4}\x{00ca}\x{0152}\x{00c7}0-9_\'']*)(\.)([a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00f4}\x{00ea}\x{0153}\x{00e7}][a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00f4}\x{00ea}\x{0153}\x{00e7}A-Z\x{00c9}\x{00c8}\x{00c0}\x{00c2}\x{00d9}\x{00ce}\x{00d4}\x{00ca}\x{0152}\x{00c7}0-9_\''\.]*)\b'
+      captures:
+        0: entity.name.function.catala_fr
+        1: punctuation.catala_fr
+        2: meta.variable_id.catala_fr
+    - match: '\b([a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00f4}\x{00ea}\x{0153}\x{00e7}][a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00f4}\x{00ea}\x{0153}\x{00e7}A-Z\x{00c9}\x{00c8}\x{00c0}\x{00c2}\x{00d9}\x{00ce}\x{00d4}\x{00ca}\x{0152}\x{00c7}0-9_\'']*)\b'
+      captures:
+        0: entity.name.function.catala_fr
+    - match: '\b([A-Z\x{00c9}\x{00c8}\x{00c0}\x{00c2}\x{00d9}\x{00ce}\x{00d4}\x{00ca}\x{0152}\x{00c7}][a-z\x{00e9}\x{00e8}\x{00e0}\x{00e2}\x{00f9}\x{00ee}\x{00f4}\x{00ea}\x{0153}\x{00e7}A-Z\x{00c9}\x{00c8}\x{00c0}\x{00c2}\x{00d9}\x{00ce}\x{00d4}\x{00ca}\x{0152}\x{00c7}0-9_\'']*)\b'
+      captures:
+        0: entity.name.class.catala_fr
+    - match: '(.)'
+      captures:
+        0: text.catala_fr
+

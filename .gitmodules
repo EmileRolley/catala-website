@@ -1,3 +1,6 @@
 [submodule "ace-editor"]
 	path = ace-editor
 	url = https://github.com/ajaxorg/ace-builds.git
+[submodule "zola-test/catala-website/themes/adidoks"]
+	path = zola-test/catala-website/themes/adidoks
+	url = https://github.com/aaranxu/adidoks.git
