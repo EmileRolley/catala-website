@@ -1,4 +1,4 @@
-%bs.raw(`require("./tailwind.css")`)
+%raw(`require("./tailwind.css")`)
 
 module App = {
   @react.component

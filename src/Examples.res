@@ -1,9 +1,10 @@
-%bs.raw(`require("../assets/catala_code.css")`)
+%raw(`require("./tailwind.css")`)
+%raw(`require("../assets/catala_code.css")`)
 
-let french_law = %bs.raw(`require("../assets/french_law.js")`)
+let french_law = %raw(`require("../assets/french_law.js")`)
 
 module FrenchFamilyBenefits = {
-  let family_benefits: string = %bs.raw(`require("../assets/allocations_familiales.html")`)
+  let family_benefits: string = %raw(`require("../assets/allocations_familiales.html")`)
 
   type child_input = {
     birth_date: option<Js.Date.t>,
@@ -48,9 +49,24 @@ module FrenchFamilyBenefits = {
     avaitEnfantAChargeAvant1erJanvier2012: bool,
   }
 
-  type allocations_familiales_output =
-    | Result(float)
-    | Error(React.element)
+  type source_position = {
+    fileName: string,
+    startLine: int,
+    endLine: int,
+    startColumn: int,
+    endColumn: int,
+    lawHeadings: array<string>,
+  }
+
+  type log_event = {
+    eventType: string,
+    information: array<string>,
+    sourcePosition: Js.Nullable.t<source_position>,
+    // TODO: find a better way to type values.
+    loggedValue: Js.Nullable.t<string>,
+  }
+
+  type allocations_familiales_output = Result(float) | Error(React.element)
 
   let validate_input = (input: allocations_familiales_input) => {
     switch (input.current_date, input.num_children, input.income, input.residence) {
@@ -108,10 +124,10 @@ module FrenchFamilyBenefits = {
     }
   }
 
-  let allocations_familiales_exe: allocations_familiales_input_validated => float = %bs.raw(`
-  function(input) {
-    return french_law.computeAllocationsFamiliales(input)
-  }
+  let allocations_familiales_exe: allocations_familiales_input_validated => float = %raw(`
+      function(input) {
+          return french_law.computeAllocationsFamiliales(input);
+      }
 `)
 
   let incomplete_input = Error(
@@ -122,7 +138,9 @@ module FrenchFamilyBenefits = {
     switch validate_input(input) {
     | None => incomplete_input
     | Some(new_input) =>
-      try {Result(allocations_familiales_exe(new_input))} catch {
+      try {
+        Result(allocations_familiales_exe(new_input))
+      } catch {
       | err =>
         Js.log(err)
         Error(<>
@@ -469,6 +487,39 @@ module FrenchFamilyBenefits = {
           }}
         </div>
       </Utils.PageSection>
+      <Utils.PageSection
+        title={<Lang.String english="Execution trace" french=`Trace d'exécution` />}>
+        {
+          let logs: array<log_event> = %raw(`french_law.retrieveLog(0)`)
+          let logs_len = Belt.Array.length(logs)
+          if 0 < logs_len {
+            React.array(
+              Belt.Array.map(logs, log => {
+                <div>
+                  <div className=%tw("font-bold")> {React.string(log.eventType)} </div>
+                  <div className=%tw("font-semibold")>
+                    {React.string(
+                      0 < Js.Array.length(log.information)
+                        ? Js.Array.joinWith("/", log.information) ++ ` = `
+                        : ``,
+                    )}
+                    <span className=%tw("text-base")>
+                      {React.string(
+                        switch Js.Nullable.toOption(log.loggedValue) {
+                        | Some(v) => v
+                        | None => "undefined"
+                        },
+                      )}
+                    </span>
+                  </div>
+                </div>
+              }),
+            )
+          } else {
+            {React.string(`No logs`)}
+          }
+        }
+      </Utils.PageSection>
       <Utils.PageSection title={<Lang.String english="Source code" french=`Code source` />}>
         <div className="catala-code" dangerouslySetInnerHTML={"__html": family_benefits} />
       </Utils.PageSection>
@@ -477,7 +528,7 @@ module FrenchFamilyBenefits = {
 }
 
 module USTaxCode = {
-  let us_tax_code: string = %bs.raw(`require("../assets/us_tax_code.html")`)
+  let us_tax_code: string = %raw(`require("../assets/us_tax_code.html")`)
 
   @react.component
   let make = () => <>
@@ -515,7 +566,7 @@ module USTaxCode = {
 }
 
 module TutorialEn = {
-  let tutorial_en: string = %bs.raw(`require("../assets/tutorial_en.html")`)
+  let tutorial_en: string = %raw(`require("../assets/tutorial_en.html")`)
 
   @react.component
   let make = () => <>
@@ -530,7 +581,7 @@ module TutorialEn = {
 }
 
 module TutorialFr = {
-  let tutorial_fr: string = %bs.raw(`require("../assets/tutoriel_fr.html")`)
+  let tutorial_fr: string = %raw(`require("../assets/tutoriel_fr.html")`)
 
   @react.component
   let make = () => <>
@@ -544,7 +595,7 @@ module TutorialFr = {
   </>
 }
 
-let family_benefits: string = %bs.raw(`require("../assets/allocations_familiales.html")`)
+let family_benefits: string = %raw(`require("../assets/allocations_familiales.html")`)
 
 let family_benefits_card: Utils.presentation_card = {
   title: <Lang.String english="French family benefits" french="Allocations familiales" />,
